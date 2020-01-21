@@ -14,10 +14,11 @@
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          var $tweet = $('<div class="tweet"></div>');
+          var tweetContent = '<b id="' + tweet.user + '"> @' + tweet.user + '</b>: ' + tweet.message;
+          $tweet.html(tweetContent);
           $tweet.appendTo($body);
-          var $tweet = $('<div></div>');
+          var $tweet = $('<div class="timestamp"></div>');
           $tweet.text(tweet.created_at);
           $tweet.appendTo($body);
           index -= 1;
@@ -29,11 +30,12 @@
           if (tempIndex !== index) {
             index = streams.home.length - 1;
             var tweet = streams.home[index];
-            var $tweetTimestamp = $('<div></div>');
+            var $tweetTimestamp = $('<div class="timestamp"></div>');
             $tweetTimestamp.text(tweet.created_at);
             $tweetTimestamp.insertAfter('button');
-            var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            var $tweet = $('<div class="tweet"></div>');
+            var tweetContent = '<b id="' + tweet.user + '"> @' + tweet.user + '</b>: ' + tweet.message;
+            $tweet.html(tweetContent);
             $tweet.insertAfter('button');
           }
         }
