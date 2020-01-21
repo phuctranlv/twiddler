@@ -9,7 +9,7 @@
 
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('');
+        $body.html(`<button id="refresh"><h1>Show New Tweets</h1></button>`);
 
         var index = streams.home.length - 1;
         while(index >= 0){
@@ -20,6 +20,17 @@
           index -= 1;
         }
 
+        var index = streams.home.length - 1;
+        document.getElementById('refresh').onclick = function refresh() {
+          var tempIndex = streams.home.length - 1;
+          if (tempIndex !== index) {
+            index = streams.home.length - 1;
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.insertAfter('button');
+          }
+        }
       });
 
     </script>
