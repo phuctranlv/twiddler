@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="style.css" type="text/css" rel="stylesheet">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
@@ -11,18 +12,20 @@
           var className = $(this).attr('class');
           var userTweets = streams.home.filter(tweet => tweet.user === className);
           var $body = $('body');
-          $body.html(`<button id="userRefresh"><h1>Show New Tweets for this user</h1></button>
-          <button id="homepage"><h1>Home Page</h1></button>`);
+          $body.html(`<div class="navigation"><button id="userRefresh"><h1>Show New Tweets for this user</h1></button>
+          <button id="homepage"><h1>Home Page</h1></button></div>
+          <div class="tweetBox"><div class="feed">Live Feed:</div></div>`);
           var index = userTweets.length - 1;
-          while(index >= 0){
-            var tweet = userTweets[index];
+          var i = 0;
+          while(i <= index){
+            var tweet = userTweets[i];
             var userName = tweet.user;
             var $tweet = $('<div class="' + userName + '"></div>');
-            var tweetContent = '<b>@' + userName + '</b>: ' + tweet.message + tweet.created_at;
+            var tweetContent = '<div class="tweet"><div class="message"><b>@' + userName + '</b>: ' + tweet.message + '</div><div class="timeStamp">' + tweet.created_at + '</div></div>';
             $tweet.html(tweetContent);
-            $tweet.appendTo($body);
-            index -= 1;
+            $tweet.insertAfter('.feed');
             $('.' + userName).on('click', clickedOnUser);
+            i += 1;
           }
           var index = userTweets.length - 1;
           document.getElementById('userRefresh').onclick = function userRefresh() {
@@ -34,9 +37,9 @@
                 var tweet = userTweets[index];
                 var userName = tweet.user;
                 var $tweet = $('<div class="' + userName + '"></div>');
-                var tweetContent = '<b>@' + userName + '</b>: ' + tweet.message + tweet.created_at;
+                var tweetContent = '<div class="tweet"><div class="message"><b>@' + userName + '</b>: ' + tweet.message + '</div><div class="timeStamp">' + tweet.created_at + '</div></div>';
                 $tweet.html(tweetContent);
-                $tweet.insertAfter('#homepage');
+                $tweet.insertAfter('.feed');
                 $('.' + userName).on('click', clickedOnUser);
               }
             }
@@ -45,17 +48,19 @@
         }
         var homepage = function() {
           var $body = $('body');
-          $body.html(`<button id="refresh"><h1>Show New Tweets</h1></button>`);
+          $body.html(`<div class="navigation"><button id="refresh"><h1>Show New Tweets</h1></button></div>
+          <div class="tweetBox"><div class="feed">Live Feed:</div></div>`);
           var index = streams.home.length - 1;
-          while(index >= 0){
-            var tweet = streams.home[index];
+          var i = 0;
+          while(i <= index){
+            var tweet = streams.home[i];
             var userName = tweet.user;
             var $tweet = $('<div class="' + userName + '"></div>');
-            var tweetContent = '<b>@' + userName + '</b>: ' + tweet.message + tweet.created_at;
+            var tweetContent = '<div class="tweet"><div class="message"><b>@' + userName + '</b>: ' + tweet.message + '</div><div class="timeStamp">' + tweet.created_at + '</div></div>';
             $tweet.html(tweetContent);
-            $tweet.appendTo($body);
-            index -= 1;
+            $tweet.insertAfter('.feed');
             $('.' + userName).on('click', clickedOnUser);
+            i += 1;
           }
           var index = streams.home.length - 1;
           document.getElementById('refresh').onclick = function refresh() {
@@ -66,9 +71,9 @@
                 var tweet = streams.home[index];
                 var userName = tweet.user;
                 var $tweet = $('<div class="' + userName + '"></div>');
-                var tweetContent = '<b>@' + userName + '</b>: ' + tweet.message + tweet.created_at;
+                var tweetContent = '<div class="tweet"><div class="message"><b>@' + userName + '</b>: ' + tweet.message + '</div><div class="timeStamp">' + tweet.created_at + '</div></div>';
                 $tweet.html(tweetContent);
-                $tweet.insertAfter('#refresh');
+                $tweet.insertAfter('.feed');
                 $('.' + userName).on('click', clickedOnUser);
               }
             }
