@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="reset.css" type="reset/css" rel="stylesheet">
     <link href="style.css" type="text/css" rel="stylesheet">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
@@ -12,9 +13,9 @@
           var className = $(this).attr('class');
           var userTweets = streams.home.filter(tweet => tweet.user === className);
           var $body = $('body');
-          $body.html(`<div class="navigation"><button id="userRefresh"><h1>Show New Tweets for this user</h1></button>
-          <button id="homepage"><h1>Home Page</h1></button></div>
-          <div class="tweetBox"><div class="feed">Live Feed:</div></div>`);
+          $body.html(`<div class="navigation"><button id="userRefresh"><a href="#feed">Show New Tweets for this user</a></button>
+          <button id="homepage"><a href="#feed">Home Page</a></button></div>
+          <div class="tweetBox"><div id="feed"></div></div>`);
           var index = userTweets.length - 1;
           var i = 0;
           while(i <= index){
@@ -23,7 +24,7 @@
             var $tweet = $('<div class="' + userName + '"></div>');
             var tweetContent = '<div class="tweet"><div class="message"><b>@' + userName + '</b>: ' + tweet.message + '</div><div class="timeStamp">' + tweet.created_at + '</div></div>';
             $tweet.html(tweetContent);
-            $tweet.insertAfter('.feed');
+            $tweet.insertAfter('#feed');
             $('.' + userName).on('click', clickedOnUser);
             i += 1;
           }
@@ -39,7 +40,7 @@
                 var $tweet = $('<div class="' + userName + '"></div>');
                 var tweetContent = '<div class="tweet"><div class="message"><b>@' + userName + '</b>: ' + tweet.message + '</div><div class="timeStamp">' + tweet.created_at + '</div></div>';
                 $tweet.html(tweetContent);
-                $tweet.insertAfter('.feed');
+                $tweet.insertAfter('#feed');
                 $('.' + userName).on('click', clickedOnUser);
               }
             }
@@ -48,8 +49,8 @@
         }
         var homepage = function() {
           var $body = $('body');
-          $body.html(`<div class="navigation"><button id="refresh"><h1>Show New Tweets</h1></button></div>
-          <div class="tweetBox"><div class="feed">Live Feed:</div></div>`);
+          $body.html(`<div class="navigation"><button id="refresh"><a href="#feed">Show New Tweets</a></button></div>
+          <div class="tweetBox"><div id="feed"></div></div>`);
           var index = streams.home.length - 1;
           var i = 0;
           while(i <= index){
@@ -58,7 +59,7 @@
             var $tweet = $('<div class="' + userName + '"></div>');
             var tweetContent = '<div class="tweet"><div class="message"><b>@' + userName + '</b>: ' + tweet.message + '</div><div class="timeStamp">' + tweet.created_at + '</div></div>';
             $tweet.html(tweetContent);
-            $tweet.insertAfter('.feed');
+            $tweet.insertAfter('#feed');
             $('.' + userName).on('click', clickedOnUser);
             i += 1;
           }
@@ -73,7 +74,7 @@
                 var $tweet = $('<div class="' + userName + '"></div>');
                 var tweetContent = '<div class="tweet"><div class="message"><b>@' + userName + '</b>: ' + tweet.message + '</div><div class="timeStamp">' + tweet.created_at + '</div></div>';
                 $tweet.html(tweetContent);
-                $tweet.insertAfter('.feed');
+                $tweet.insertAfter('#feed');
                 $('.' + userName).on('click', clickedOnUser);
               }
             }
