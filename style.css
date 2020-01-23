@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  background-color: #FABB92;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  background-color: #523F1F;
+  height: 5rem;
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+}
+
+button {
+  background-color: #BE0297;
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  width: auto;
+  z-index: 10;
+}
+
+.tweetBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 5rem;
+}
+
+.tweet {
+  margin: .5rem;
+  font-family: fantasy;
+  background-color: #3B8A75;
+}
+
+.message {
+  font-size: 1.6rem;
+}
+
+.timeStamp {
+  font-size: 1rem;
+}
